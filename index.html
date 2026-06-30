@@ -8,7 +8,6 @@
 </head>
 <body class="lock-scroll">
 
-    <!-- GIFT INTRO OVERLAY -->
     <div id="gift-intro">
         <div class="gift-scene">
             <div class="gift-scene-inner">
@@ -32,7 +31,34 @@
                 </div>
             </div>
 
-            <div class="gift-tagline">Happy Anniversary Indayunn!🎀</div>
+            <!-- <div class="gift-tagline">
+                <p>H</p>
+                <p>A</p>
+                <p>P</p>
+                <p>P</p>
+                <p>Y</p>
+                <p>A</p>
+                <p>N</p>
+                <p>N</p>
+                <p>I</p>
+                <p>V</p>
+                <p>E</p>
+                <p>R</p>
+                <p>S</p>
+                <p>A</p>
+                <p>R</p>
+                <p>Y</p>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="intro-tagline">
+        <div class="line">
+            <p>H</p><p>A</p><p>P</p><p>P</p><p>Y</p>
+        </div>
+
+        <div class="line">
+            <p>A</p><p>N</p><p>N</p><p>I</p><p>V</p><p>E</p><p>R</p><p>S</p><p>A</p><p>R</p><p>Y</p>
         </div>
     </div>
 
@@ -41,7 +67,10 @@
             <h1>Anniversary Short Timeline</h1>
             <p class="subtitle">Celebrating 365 days with you🥂</p> 
         </header>
-
+        <div class="spotlight">
+            These are just some of the memories we’ve experienced together over the year (pero naay uban kay before pa ta officially nagka uyab heheh). 
+            This isn’t everything, but I just want to lookback, embrace this moments specially for those times nga you agreed or forced to have your picture taken mwehehe.
+        </div>
         <div class="gallery">
             <div class="photo-card">
                 <div class="photo">🐾</div>
@@ -164,6 +193,58 @@
         }
 
         window.addEventListener('scroll', checkVisibility);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const box = document.querySelector(".spotlight");
+            if (!box) return;
+
+            let idleTimer;
+
+            function setPosition(e) {
+                const rect = box.getBoundingClientRect();
+
+                const x = (e.clientX || e.touches?.[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches?.[0].clientY) - rect.top;
+
+                box.style.setProperty("--x", x + "px");
+                box.style.setProperty("--y", y + "px");
+
+                // remove idle mode when user interacts
+                box.classList.remove("idle");
+
+                clearTimeout(idleTimer);
+                idleTimer = setTimeout(() => {
+                    box.classList.add("idle"); // start floating mode
+                }, 2000); // 2 seconds idle
+            }
+
+            // desktop
+            box.addEventListener("mousemove", setPosition);
+            box.addEventListener("mouseenter", setPosition);
+
+            // mobile
+            box.addEventListener("touchstart", setPosition);
+            box.addEventListener("touchmove", setPosition);
+
+            // start in idle mode initially
+            box.classList.add("idle");
+        });
+
+        const letters = document.querySelectorAll('.intro-tagline p');
+
+        letters.forEach((letter, index) => {
+            letter.style.animationDelay = `${4 + (index * 0.5)}s`;
+        });
+
+        // total intro duration
+        const totalDelay = 4 + ((letters.length - 1) * 0.5) + 1;
+
+        // after all letters finish flipping
+        setTimeout(() => {
+            letters.forEach(letter => {
+                letter.classList.add('glow');
+            });
+        }, totalDelay * 1000);
 
     </script>
 </body>

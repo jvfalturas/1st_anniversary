@@ -7,13 +7,6 @@
     box-sizing: border-box;
 }
 
-/* html, body {
-    font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(135deg, #eaf4ff 0%, #f3f8ff 100%);
-    color: #4a4a4a;
-    overflow-x: hidden;
-} */
-
 html, body {
     font-family: 'Quicksand', sans-serif;
     background-image: url('bg2.gif');
@@ -36,15 +29,14 @@ body.lock-scroll {
     padding: 20px;
 }
 
-/* ============================= */
-/* GIFT INTRO OVERLAY            */
-/* ============================= */
+
+
+/* ######################### gift intro #########################*/
 #gift-intro {
     position: fixed;
     inset: 0;
     width: 100vw;
     height: 100vh;
-    /* background: linear-gradient(135deg, #dff6ff 0%, #eaf4ff 100%); */
     background-image: url('bg2.gif');
     z-index: 9999;
     display: flex;
@@ -94,7 +86,9 @@ body.lock-scroll {
     to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* Box base */
+
+
+/* ######################### gift box #########################*/
 .gift-box-base {
     position: absolute;
     bottom: 30px;
@@ -165,7 +159,9 @@ body.lock-scroll {
     }
 }
 
-/* Glow burst from inside the box when it opens */
+
+
+/* ######################### gift glow #########################*/
 .gift-glow {
     position: absolute;
     bottom: 60px;
@@ -190,7 +186,9 @@ body.lock-scroll {
     }
 }
 
-/* Lid */
+
+
+/* ######################### gift lid #########################*/
 .gift-lid-wrap {
     position: absolute;
     bottom: 168px;
@@ -242,7 +240,9 @@ body.lock-scroll {
     }
 }
 
-/* Bow sitting on top of lid */
+
+
+/* ######################### gift bow #########################*/
 .gift-bow {
     position: absolute;
     bottom: 196px;
@@ -287,7 +287,9 @@ body.lock-scroll {
     z-index: 2;
 }
 
-/* Ribbon tails that "untie" - they slide/fall away before bow pops */
+
+
+/* ######################### ribbon tali #########################*/
 .ribbon-tail {
     position: absolute;
     top: 40px;
@@ -332,6 +334,8 @@ body.lock-scroll {
     }
 }
 
+
+
 /* Bow loops untie/unfurl before lid pops */
 #gift-intro.opening .bow-loop.left {
     animation: untieLeft 0.7s ease-in forwards;
@@ -366,6 +370,8 @@ body.lock-scroll {
     to { opacity: 0; transform: translateX(-50%) scale(0.5); }
 }
 
+
+
 /* Gentle entrance + idle bounce for the whole scene before untying starts */
 .gift-scene-inner {
     position: relative;
@@ -393,11 +399,78 @@ body.lock-scroll {
     }
 }
 
-/* ============================= */
-/* MAIN PAGE                     */
-/* ============================= */
 
-/* Header Animation */
+
+/* ######################### intro tagline #########################*/
+.intro-tagline{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.line{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.intro-tagline p{
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffffff78;
+    letter-spacing: 2px;
+
+    opacity: 0;
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+    display: inline-block;
+
+    /* animation: fadeFlip 1s ease forwards; */
+    animation-name: fadeFlip;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeFlip{
+    0%{
+        opacity:0;
+        transform: rotateX(90deg) translateY(20px);
+    }
+
+    100%{
+        opacity:1;
+        transform: rotateX(0deg) translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100%{
+        color: #ffffff78;
+        text-shadow: none;
+    }
+
+    50%{
+        color: #fff;
+        text-shadow:
+            0 0 8px rgba(255,255,255,.8),
+            0 0 16px rgba(255,255,255,.6),
+            0 0 24px rgba(255,255,255,.4);
+    }
+}
+
+.intro-tagline p.glow{
+    animation-name: fadeFlip, glow;
+    animation-duration: 1s, 3s;
+    animation-timing-function: ease, ease-in-out;
+    animation-fill-mode: forwards, forwards;
+    animation-iteration-count: 1, infinite;
+}
+
+
+/* ######################### header animation #########################*/
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -433,7 +506,53 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Photo Gallery */
+.spotlight {
+  position: relative;
+  background: #000;
+  color: white;
+  padding: 40px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: justify;
+  cursor: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* spotlight layer */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle 140px at var(--x, 50%) var(--y, 50%),
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
+
+  transition: background-position 0.3s ease;
+}
+
+/* idle floating mode */
+.spotlight.idle::before {
+  /* animation: floatSpotlight 6s infinite ease-in-out; */
+  transition: transform 0.15s ease;
+}
+
+/* safer animation approach */
+/* @keyframes floatSpotlight {
+  0%   { background-position: 30% 30%; }
+  25%  { background-position: 70% 40%; }
+  50%  { background-position: 60% 70%; }
+  75%  { background-position: 20% 60%; }
+  100% { background-position: 30% 30%; }
+} */
+
+
+
+
+/* ######################### photo gallery #########################*/
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -479,7 +598,9 @@ h1 {
     color: #666;
 }
 
-/* Message Section */
+
+
+/* ######################### message section #########################*/
 .message {
     background: white;
     padding: 40px;
@@ -495,6 +616,8 @@ h1 {
     opacity: 1;
     transform: scale(1);
 }
+
+
 
 /* Interactive Elements */
 .heart-btn {
@@ -520,6 +643,8 @@ h1 {
 .heart-btn:active {
     transform: scale(0.95);
 }
+
+
 
 /* Footer */
 footer {
@@ -559,6 +684,8 @@ footer p {
         transform: translateY(-5px);
     }
 }
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
