@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Anniversary</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="custom.css">
+
 </head>
 <body class="lock-scroll">
 
@@ -148,20 +154,55 @@
             });
         }
 
-        function showLove() {
-            const btn = document.querySelector('.heart-btn');
-            btn.textContent = '💖 I Love You! 💖';
-            btn.style.background = 'linear-gradient(135deg, #84caff 0%, #129CFF 50%, #1F4E79 100%)';
+        // function showLove() {
 
-            // Create floating hearts
+        //     const btn = document.querySelector('.heart-btn');
+
+        //     btn.classList.add('clicked');   // <-- DIRI
+
+        //     btn.textContent = '💖 I Love You! 💖';
+
+        //     // Create floating hearts
+        //     for (let i = 0; i < 10; i++) {
+        //         createHeart();
+        //     }
+
+        //     setTimeout(() => {
+        //         btn.textContent = 'Happy Anniversary! 🩵💙🩵';
+        //         btn.classList.remove('clicked');   // <-- Aron mobalik sa normal
+        //     }, 2000);
+
+        // }
+
+        const messages = [
+            "💙 I Love You! 💙",
+            "💙 Thank You For Everything 💙",
+            "💙 No Matter What 💙",
+            "Click Again? Just Kidding 😆"
+        ];
+
+        let msgIndex = 0;
+
+        function showLove() {
+
+            const btn = document.querySelector('.heart-btn');
+
+            btn.classList.add('clicked');
+
+            // change text per click
+            btn.textContent = messages[msgIndex];
+
+            // next message
+            msgIndex = (msgIndex + 1) % messages.length;
+
+            // floating hearts
             for (let i = 0; i < 10; i++) {
                 createHeart();
             }
 
             setTimeout(() => {
-                btn.textContent = '💖 Happy Anniversary!';
-                btn.style.background = 'linear-gradient(135deg, #84caff 0%, #129CFF 50%, #1F4E79 100%)';
-            }, 2000);
+                btn.classList.remove('clicked');
+            }, 500);
         }
 
         function createHeart() {

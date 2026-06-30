@@ -421,6 +421,13 @@ body.lock-scroll {
     font-weight: bold;
     color: #ffffff78;
     letter-spacing: 2px;
+    font-family: "Patrick Hand", cursive;
+    /* color: #f8f8f8; */
+
+    text-shadow:
+        1px 1px 0 rgba(255,255,255,.25),
+    -1px -1px 0 rgba(255,255,255,.15),
+        0 0 3px rgba(255,255,255,.3);
 
     opacity: 0;
     transform: rotateX(90deg);
@@ -468,6 +475,7 @@ body.lock-scroll {
     animation-fill-mode: forwards, forwards;
     animation-iteration-count: 1, infinite;
 }
+
 
 
 /* ######################### header animation #########################*/
@@ -540,16 +548,6 @@ h1 {
   transition: transform 0.15s ease;
 }
 
-/* safer animation approach */
-/* @keyframes floatSpotlight {
-  0%   { background-position: 30% 30%; }
-  25%  { background-position: 70% 40%; }
-  50%  { background-position: 60% 70%; }
-  75%  { background-position: 20% 60%; }
-  100% { background-position: 30% 30%; }
-} */
-
-
 
 
 /* ######################### photo gallery #########################*/
@@ -620,7 +618,7 @@ h1 {
 
 
 /* Interactive Elements */
-.heart-btn {
+/* .heart-btn {
     font-family: 'Quicksand', sans-serif;
     background: linear-gradient(135deg, #84caff 0%, #129CFF 50%, #1F4E79 100%);
     color: white;
@@ -642,6 +640,193 @@ h1 {
 
 .heart-btn:active {
     transform: scale(0.95);
+} */
+
+.heart-btn{
+    position: relative;
+    overflow: hidden;
+
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.15em;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    color: white;
+    cursor: pointer;
+
+    padding: 16px 38px;
+    border: none;
+    border-radius: 50px;
+
+    background: linear-gradient(
+        135deg,
+        #9cdcff,
+        #2ea9ff,
+        #0d7bd8,
+        #1F4E79
+    );
+
+    background-size: 250% 250%;
+
+    display: block;
+    margin: 30px auto;
+
+    transition: .35s ease;
+
+    animation:
+        pop .5s ease,
+        breathing 2.5s ease-in-out infinite,
+        glowButton 2.5s ease-in-out infinite,
+        gradientMove 6s linear infinite,
+        bounce 1.2s ease-in-out infinite;
+}
+
+.heart-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:70%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent,
+            rgba(255,255,255,.75),
+            transparent
+        );
+
+    transform: skewX(-25deg);
+
+    animation: shine 3s infinite;
+}
+
+.heart-btn:hover{
+
+    transform:
+        translateY(-6px)
+        scale(1.08);
+
+    box-shadow:
+        0 15px 35px rgba(46,169,255,.45),
+        0 0 30px rgba(46,169,255,.55);
+
+}
+
+.heart-btn:active{
+
+    transform:
+        scale(.95);
+
+}
+
+@keyframes breathing{
+
+    0%,100%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+}
+
+@keyframes glowButton{
+
+    0%,100%{
+
+        box-shadow:
+            0 0 10px rgba(46,169,255,.25);
+
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 20px rgba(46,169,255,.45),
+            0 0 35px rgba(46,169,255,.35);
+
+    }
+
+}
+
+@keyframes gradientMove{
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+}
+
+@keyframes shine{
+
+    0%{
+
+        left:-120%;
+
+    }
+
+    60%{
+
+        left:140%;
+
+    }
+
+    100%{
+
+        left:140%;
+
+    }
+
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-3px);
+    }
+}
+
+@keyframes pop{
+
+    0%{
+        transform:scale(1);
+    }
+
+    40%{
+        transform:scale(1.18);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+
 }
 
 
