@@ -25,7 +25,7 @@ body.lock-scroll {
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 120px auto;
     padding: 20px;
 }
 
@@ -403,10 +403,18 @@ body.lock-scroll {
 
 /* ######################### intro tagline #########################*/
 .intro-tagline{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+
+    padding: 15px 0;
 }
 
 .line{
@@ -493,11 +501,21 @@ body.lock-scroll {
 header {
     text-align: center;
     padding: 40px 20px;
-    animation: fadeInDown 1s ease-out;
+    /* animation: fadeInDown 1s ease-out; */
+}
+
+header h1,
+header p,
+.spotlight,
+.photo-card {
+    opacity: 0; 
+    transform: translateY(30px);
 }
 
 header p {
     font-family: 'Dancing Script', cursive;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 5.5s;
 }
 
 h1 {
@@ -506,6 +524,57 @@ h1 {
     color: #3A6EA5;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 4.5s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(50px);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-10px);
+    }
+
+    70% {
+        transform: scale(0.95) translateY(5px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(.8);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-12px) scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .subtitle {
@@ -515,15 +584,17 @@ h1 {
 }
 
 .spotlight {
-  position: relative;
-  background: #000;
-  color: white;
-  padding: 40px;
-  border-radius: 12px;
-  overflow: hidden;
-  text-align: justify;
-  cursor: none;
-  -webkit-tap-highlight-color: transparent;
+    position: relative;
+    background: #000;
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: justify;
+    cursor: none;
+    -webkit-tap-highlight-color: transparent;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 6.5s;
 }
 
 /* spotlight layer */
@@ -593,7 +664,15 @@ h1 {
     padding: 20px;
     text-align: center;
     font-style: italic;
-    color: #666;
+    color: #000000;
+    
+}
+
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #fff; /* para clean tan-aw kung naay space */
 }
 
 
@@ -885,4 +964,18 @@ footer p {
     .photo {
         height: 200px;
     }
+}
+
+
+
+.devider {
+    width: 1500%;
+    max-width: 1200px;   /* limits sobra kadako sa desktop */
+    height: clamp(40px, 8vw, 120px); 
+    margin: 40px auto;
+
+    background: url('divider4.png') no-repeat center;
+    background-size: contain;
+
+    filter: brightness(0) invert(1);
 }
